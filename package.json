@@ -1,0 +1,9 @@
+{
+  "name": "neeraja-birthday",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A private birthday letter for Neeraja, from Sooraj.",
+  "scripts": {
+    "start": "npx --yes serve ."
+  }
+}
