@@ -121,7 +121,18 @@ envelope.addEventListener("click", () => {
   }, 650);
 });
 
-document.getElementById("celebrate").addEventListener("click", () => burst(320));
+document.getElementById("celebrate").addEventListener("click", (event) => {
+  const btn = event.currentTarget;
+  btn.classList.remove("is-lit");
+  void btn.offsetWidth;
+  btn.classList.add("is-lit");
+  const x = event.clientX || window.innerWidth / 2;
+  const y = event.clientY || window.innerHeight * 0.72;
+  burst(90, x, y);
+  burst(160, window.innerWidth / 2, window.innerHeight * 0.45);
+  setTimeout(() => burst(120, window.innerWidth * 0.28, window.innerHeight * 0.38), 180);
+  setTimeout(() => burst(120, window.innerWidth * 0.72, window.innerHeight * 0.38), 280);
+});
 
 applyCopy();
 tickCountdown();
@@ -196,18 +207,35 @@ function drawPetals() {
 drawPetals();
 
 let sparks = [];
+const sparkColors = ["#efd3a0", "#fff6e8", "#e8b4bc", "#e0707c", "#c9a15a", "#ffffff"];
 
-function burst(count) {
+function burst(count, ox, oy) {
+  const x = ox ?? window.innerWidth / 2;
+  const y = oy ?? window.innerHeight * 0.32;
   for (let i = 0; i < count; i += 1) {
+    const kind = i % 7 === 0 ? "heart" : i % 3 === 0 ? "spark" : "dot";
     sparks.push({
-      x: window.innerWidth / 2,
-      y: window.innerHeight * 0.32,
-      vx: (Math.random() - 0.5) * 16,
-      vy: (Math.random() - 0.85) * 16,
+      x,
+      y,
+      vx: (Math.random() - 0.5) * 18,
+      vy: (Math.random() - 0.9) * 18,
       life: 1,
-      color: Math.random() > 0.5 ? "#e8c48a" : "#e0707c",
+      size: kind === "heart" ? 5 + Math.random() * 4 : 1.6 + Math.random() * 2.4,
+      kind,
+      rot: Math.random() * Math.PI,
+      color: sparkColors[Math.floor(Math.random() * sparkColors.length)],
     });
   }
+}
+
+function drawHeart(ctx, x, y, size) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + size * 0.3);
+  ctx.bezierCurveTo(x, y - size * 0.3, x - size, y - size * 0.3, x - size, y + size * 0.15);
+  ctx.bezierCurveTo(x - size, y + size * 0.7, x, y + size, x, y + size * 1.15);
+  ctx.bezierCurveTo(x, y + size, x + size, y + size * 0.7, x + size, y + size * 0.15);
+  ctx.bezierCurveTo(x + size, y - size * 0.3, x, y - size * 0.3, x, y + size * 0.3);
+  ctx.fill();
 }
 
 function drawSparks() {
@@ -216,13 +244,25 @@ function drawSparks() {
   sparks.forEach((sp) => {
     sp.x += sp.vx;
     sp.y += sp.vy;
-    sp.vy += 0.12;
-    sp.life -= 0.012;
+    sp.vy += 0.13;
+    sp.rot += 0.08;
+    sp.life -= 0.01;
     sctx.globalAlpha = Math.max(sp.life, 0);
     sctx.fillStyle = sp.color;
-    sctx.beginPath();
-    sctx.arc(sp.x, sp.y, 2.4, 0, Math.PI * 2);
-    sctx.fill();
+    if (sp.kind === "heart") {
+      drawHeart(sctx, sp.x, sp.y, sp.size);
+    } else if (sp.kind === "spark") {
+      sctx.save();
+      sctx.translate(sp.x, sp.y);
+      sctx.rotate(sp.rot);
+      sctx.fillRect(-sp.size, -0.6, sp.size * 2, 1.2);
+      sctx.fillRect(-0.6, -sp.size, 1.2, sp.size * 2);
+      sctx.restore();
+    } else {
+      sctx.beginPath();
+      sctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
+      sctx.fill();
+    }
   });
   sctx.globalAlpha = 1;
   requestAnimationFrame(drawSparks);
