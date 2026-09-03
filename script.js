@@ -142,31 +142,51 @@ function sizeCanvases() {
 sizeCanvases();
 window.addEventListener("resize", sizeCanvases);
 
-const petals = Array.from({ length: 48 }, () => ({
+const stars = Array.from({ length: 90 }, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  r: Math.random() * 1.4 + 0.3,
+  tw: Math.random() * Math.PI * 2,
+}));
+
+const petals = Array.from({ length: 28 }, () => ({
   x: Math.random() * window.innerWidth,
   y: Math.random() * window.innerHeight,
-  r: 4 + Math.random() * 7,
-  s: 0.35 + Math.random() * 0.8,
+  r: 3 + Math.random() * 6,
+  s: 0.25 + Math.random() * 0.55,
   a: Math.random() * Math.PI * 2,
-  hue: 340 + Math.random() * 30,
+  hue: 330 + Math.random() * 25,
 }));
 
 function drawPetals() {
-  pctx.clearRect(0, 0, petalCanvas.width, petalCanvas.height);
+  const w = petalCanvas.width;
+  const h = petalCanvas.height;
+  pctx.clearRect(0, 0, w, h);
+
+  stars.forEach((st) => {
+    st.tw += 0.018;
+    pctx.globalAlpha = 0.25 + Math.sin(st.tw) * 0.35;
+    pctx.fillStyle = "#f7efe4";
+    pctx.beginPath();
+    pctx.arc(st.x * w, st.y * h, st.r, 0, Math.PI * 2);
+    pctx.fill();
+  });
+  pctx.globalAlpha = 1;
+
   petals.forEach((p) => {
     p.y += p.s;
-    p.x += Math.sin(p.a) * 0.4;
+    p.x += Math.sin(p.a) * 0.35;
     p.a += 0.01;
-    if (p.y > petalCanvas.height + 20) {
+    if (p.y > h + 20) {
       p.y = -20;
-      p.x = Math.random() * petalCanvas.width;
+      p.x = Math.random() * w;
     }
     pctx.save();
     pctx.translate(p.x, p.y);
     pctx.rotate(p.a);
-    pctx.fillStyle = `hsla(${p.hue}, 55%, 68%, 0.5)`;
+    pctx.fillStyle = `hsla(${p.hue}, 48%, 78%, 0.38)`;
     pctx.beginPath();
-    pctx.ellipse(0, 0, p.r, p.r * 0.55, 0, 0, Math.PI * 2);
+    pctx.ellipse(0, 0, p.r, p.r * 0.5, 0, 0, Math.PI * 2);
     pctx.fill();
     pctx.restore();
   });
