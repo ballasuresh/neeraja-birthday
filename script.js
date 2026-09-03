@@ -1,24 +1,39 @@
 const BIRTHDAY = new Date("2026-09-03T00:00:00+05:30");
+const BIRTHDAY_END = new Date("2026-09-04T00:00:00+05:30");
 
 const gate = document.getElementById("gate");
 const story = document.getElementById("story");
 const envelope = document.getElementById("openSeal");
 const liveLine = document.getElementById("liveLine");
+const countdown = document.getElementById("countdown");
+const todayMark = document.getElementById("todayMark");
 
 function pad(n) {
   return String(n).padStart(2, "0");
 }
 
+function isBirthdayNow() {
+  const now = new Date();
+  return now >= BIRTHDAY && now < BIRTHDAY_END;
+}
+
 function tickCountdown() {
   const now = new Date();
-  const diff = BIRTHDAY - now;
 
+  if (isBirthdayNow()) {
+    countdown.classList.add("is-hidden");
+    todayMark.hidden = false;
+    liveLine.textContent = "Happy birthday, my love. Today belongs to you.";
+    document.body.classList.add("is-today");
+    return;
+  }
+
+  const diff = BIRTHDAY - now;
   if (diff <= 0) {
-    document.getElementById("d").textContent = "00";
-    document.getElementById("h").textContent = "00";
-    document.getElementById("m").textContent = "00";
-    document.getElementById("s").textContent = "00";
-    liveLine.textContent = "It is your day. The whole sky is for you.";
+    countdown.classList.add("is-hidden");
+    todayMark.hidden = false;
+    todayMark.querySelector("strong").textContent = "Your day still glows here";
+    liveLine.textContent = "This letter stays open for you.";
     return;
   }
 
@@ -50,12 +65,16 @@ envelope.addEventListener("click", () => {
         ],
         { duration: 800, easing: "ease", fill: "forwards" }
       );
-      burst(180);
+      burst(isBirthdayNow() ? 320 : 180);
+      if (isBirthdayNow()) {
+        setTimeout(() => burst(220), 900);
+        setTimeout(() => burst(180), 1800);
+      }
     }, 720);
   }, 780);
 });
 
-document.getElementById("celebrate").addEventListener("click", () => burst(260));
+document.getElementById("celebrate").addEventListener("click", () => burst(320));
 
 tickCountdown();
 setInterval(tickCountdown, 1000);
@@ -75,7 +94,8 @@ function sizeCanvases() {
 sizeCanvases();
 window.addEventListener("resize", sizeCanvases);
 
-const petals = Array.from({ length: 36 }, () => ({
+const petalCount = isBirthdayNow() ? 70 : 36;
+const petals = Array.from({ length: petalCount }, () => ({
   x: Math.random() * window.innerWidth,
   y: Math.random() * window.innerHeight,
   r: 4 + Math.random() * 7,
@@ -114,9 +134,9 @@ function burst(count) {
   for (let i = 0; i < count; i += 1) {
     sparks.push({
       x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      vx: (Math.random() - 0.5) * 14,
-      vy: (Math.random() - 0.8) * 14,
+      y: window.innerHeight * 0.38,
+      vx: (Math.random() - 0.5) * 16,
+      vy: (Math.random() - 0.85) * 16,
       life: 1,
       color: Math.random() > 0.5 ? "#e8c48a" : "#e0707c",
     });
