@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
-      content="A private birthday letter for Neeraja — from Sooraj. September 3."
+      content="A birthday letter for Neeraja, from Sooraj — meant to be opened any day."
     />
     <meta name="theme-color" content="#14080c" />
-    <title>Happy Birthday, Neeraja · September 3 · Sooraj</title>
+    <title>For Neeraja · Sooraj</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' x='8' font-size='42'%3E♥%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,9 +31,9 @@
 
     <div class="gate" id="gate">
       <div class="gate-copy">
-        <p class="whisper">Today is your day</p>
-        <h1 class="script-title">Happy Birthday</h1>
-        <p class="whisper mute">Neeraja · from Sooraj</p>
+        <p class="whisper" id="gateKicker">A letter, kept for you</p>
+        <h1 class="script-title" id="gateTitle">For Neeraja</h1>
+        <p class="whisper mute">from Sooraj · September 3</p>
       </div>
 
       <button type="button" class="envelope" id="openSeal" aria-label="Open the letter">
@@ -49,17 +49,17 @@
         </span>
       </button>
 
-      <p class="hint">Open your birthday letter</p>
+      <p class="hint" id="gateHint">Open whenever you wish</p>
     </div>
 
     <main class="story" id="story" hidden>
       <header class="hero">
         <p class="eyebrow">Happy Birthday</p>
         <h1 class="hero-name">Neeraja</h1>
-        <p class="hero-sub">September 3 · written with love by Sooraj</p>
-        <div class="today-mark" id="todayMark" hidden>
-          <span>Today</span>
-          <strong>Your birthday is here</strong>
+        <p class="hero-sub">September 3 · a letter from Sooraj that does not expire</p>
+        <div class="today-mark" id="todayMark">
+          <span id="momentLabel">Always</span>
+          <strong id="momentTitle">This letter is yours</strong>
         </div>
         <div class="cake" aria-hidden="true">
           <div class="flame"></div>
@@ -67,7 +67,7 @@
           <div class="tier"></div>
           <div class="plate"></div>
         </div>
-        <div class="countdown" id="countdown" aria-live="polite">
+        <div class="countdown is-hidden" id="countdown" aria-live="polite">
           <div class="tick">
             <strong id="d">00</strong><span>Days</span>
           </div>
@@ -81,27 +81,28 @@
             <strong id="s">00</strong><span>Seconds</span>
           </div>
         </div>
-        <p class="live-line" id="liveLine"></p>
+        <p class="live-line" id="liveLine">Open this on any night. It was written for you.</p>
       </header>
 
       <section class="letter-wrap">
         <article class="letter">
-          <p class="letter-date">Today · September 3</p>
+          <p class="letter-date" id="letterDate">For you, whenever you arrive</p>
           <h2>My dearest Neeraja,</h2>
-          <p>
-            Happy birthday. This is your morning, your sunlight, your day —
-            and I wanted you to open it knowing you are loved without measure.
+          <p id="letterLead">
+            Happy birthday. I made this so you would have a place that holds
+            your name the way I hold it — carefully, proudly, and a little in awe.
+            If you are reading this today, tomorrow, or years from now, it is still for you.
           </p>
           <p>
             You are the quiet I look for in a loud room. The smile I replay
             when the day is heavy. You turned ordinary hours into a life I want
             to keep.
           </p>
-          <p>
-            Today the calendar writes <em>September 3</em> in gold. The world
-            can wait. This hour is only for you.
+          <p id="letterGold">
+            September 3 will always be gold on my calendar. The world can wait.
+            This hour — this one, right now — is only for you.
           </p>
-          <p>Happy birthday, my love. May this year be as gentle as you are.</p>
+          <p>Happy birthday, my love. May every year be as gentle as you are.</p>
           <p class="sign">Always yours,<br /><span>Sooraj</span></p>
         </article>
       </section>
@@ -147,7 +148,7 @@
       <footer class="finale">
         <div class="mono" aria-hidden="true">N + S</div>
         <h2>Happy Birthday, Neeraja</h2>
-        <p>May you feel as loved as you are.</p>
+        <p>May you feel as loved as you are — today, and every time you return.</p>
         <button type="button" class="btn" id="celebrate">Celebrate</button>
       </footer>
     </main>
