@@ -94,16 +94,21 @@ body {
   position: relative;
   z-index: 2;
   min-height: 100svh;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  padding: calc(env(safe-area-inset-top, 0px) + 96px) 20px 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px 32px;
   text-align: center;
 }
 
+.gate[hidden] {
+  display: none !important;
+}
+
 .gate-copy {
-  margin-bottom: 36px;
-  padding-top: 12px;
+  margin-bottom: 18px;
+  padding-top: 0;
 }
 
 .whisper {
@@ -120,12 +125,12 @@ body {
 }
 
 .script-title {
-  margin-top: 18px;
-  padding-top: 8px;
+  margin-top: 6px;
+  padding-top: 0;
   font-family: var(--script);
-  font-size: clamp(52px, 12vw, 108px);
+  font-size: clamp(40px, 8vw, 68px);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.1;
   background: linear-gradient(180deg, #fff6e8 0%, #e8c48a 55%, #b8874a 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -236,7 +241,11 @@ body {
 .story {
   position: relative;
   z-index: 2;
-  padding: calc(env(safe-area-inset-top, 0px) + 28px) 20px 96px;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) 20px 64px;
+}
+
+.story[hidden] {
+  display: none !important;
 }
 
 .hero,
@@ -249,12 +258,11 @@ body {
 }
 
 .hero {
-  min-height: 88svh;
-  display: grid;
-  place-content: center;
+  min-height: 0;
+  display: block;
   text-align: center;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 88px);
-  padding-bottom: 48px;
+  padding-top: 4px;
+  padding-bottom: 20px;
 }
 
 .eyebrow {
@@ -265,11 +273,11 @@ body {
 }
 
 .hero-name {
-  margin: 8px 0 10px;
+  margin: 4px 0 6px;
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(64px, 16vw, 140px);
-  line-height: 0.9;
+  font-size: clamp(44px, 9vw, 80px);
+  line-height: 1;
   letter-spacing: -0.03em;
 }
 
@@ -321,7 +329,7 @@ body {
 }
 
 .today-mark {
-  margin: 28px auto 8px;
+  margin: 14px auto 4px;
   display: grid;
   gap: 6px;
   justify-items: center;
@@ -345,7 +353,7 @@ body {
 }
 
 .cake {
-  margin: 28px auto 0;
+  margin: 12px auto 0;
   width: 120px;
   height: 110px;
   position: relative;

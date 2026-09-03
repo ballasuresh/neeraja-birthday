@@ -53,25 +53,21 @@ function tickCountdown() {
 envelope.addEventListener("click", () => {
   envelope.classList.add("is-open");
   setTimeout(() => {
-    gate.style.transition = "opacity 0.7s ease";
-    gate.style.opacity = "0";
-    setTimeout(() => {
-      gate.hidden = true;
-      story.hidden = false;
-      story.animate(
-        [
-          { opacity: 0, transform: "translateY(18px)" },
-          { opacity: 1, transform: "translateY(0)" },
-        ],
-        { duration: 800, easing: "ease", fill: "forwards" }
-      );
-      burst(isBirthdayNow() ? 320 : 180);
-      if (isBirthdayNow()) {
-        setTimeout(() => burst(220), 900);
-        setTimeout(() => burst(180), 1800);
-      }
-    }, 720);
-  }, 780);
+    gate.hidden = true;
+    story.hidden = false;
+    story.animate(
+      [
+        { opacity: 0, transform: "translateY(18px)" },
+        { opacity: 1, transform: "translateY(0)" },
+      ],
+      { duration: 700, easing: "ease", fill: "forwards" }
+    );
+    burst(isBirthdayNow() ? 320 : 180);
+    if (isBirthdayNow()) {
+      setTimeout(() => burst(220), 900);
+      setTimeout(() => burst(180), 1800);
+    }
+  }, 650);
 });
 
 document.getElementById("celebrate").addEventListener("click", () => burst(320));
