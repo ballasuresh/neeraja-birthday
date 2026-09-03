@@ -104,6 +104,7 @@ envelope.addEventListener("click", () => {
   setTimeout(() => {
     gate.hidden = true;
     story.hidden = false;
+    story.classList.add("is-shown");
     story.animate(
       [
         { opacity: 0, transform: "translateY(14px)" },
