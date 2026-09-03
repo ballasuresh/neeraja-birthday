@@ -96,12 +96,14 @@ body {
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: 48px 20px 72px;
+  align-content: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 96px) 20px 88px;
   text-align: center;
 }
 
 .gate-copy {
-  margin-bottom: 28px;
+  margin-bottom: 36px;
+  padding-top: 12px;
 }
 
 .whisper {
@@ -118,11 +120,12 @@ body {
 }
 
 .script-title {
-  margin-top: 10px;
+  margin-top: 18px;
+  padding-top: 8px;
   font-family: var(--script);
   font-size: clamp(52px, 12vw, 108px);
   font-weight: 400;
-  line-height: 0.95;
+  line-height: 1.15;
   background: linear-gradient(180deg, #fff6e8 0%, #e8c48a 55%, #b8874a 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -233,7 +236,7 @@ body {
 .story {
   position: relative;
   z-index: 2;
-  padding: 24px 20px 96px;
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 20px 96px;
 }
 
 .hero,
@@ -250,7 +253,8 @@ body {
   display: grid;
   place-content: center;
   text-align: center;
-  padding-top: 40px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 88px);
+  padding-bottom: 48px;
 }
 
 .eyebrow {
